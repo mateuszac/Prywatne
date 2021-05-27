@@ -264,3 +264,4 @@ class Ui_Zuraw_window(object):
         self.label.setText(QtWidgets.QApplication.translate("Zuraw_window", "Program Żuraw © Copyright by Mateusz Borecki 2021", None, -1))
         self.label_2.setText(QtWidgets.QApplication.translate("Zuraw_window", "Typowa lokalizacja dll : C:Program FilesAutodeskAutodesk Robot Structural Analysis Professional 2020SystemExeInterop.RobotOM.dll", None, -1))
 
+

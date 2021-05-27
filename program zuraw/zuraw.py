@@ -65,6 +65,7 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
             plik_json.write(json.dumps(sciezki, indent=3, sort_keys=True))
 
 
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication()
     qt_app = ZurawGUI()
