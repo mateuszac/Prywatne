@@ -17,10 +17,14 @@ Robapp = RobotApplicationClass()
 # POŁĄCZENIE Z WŁĄCZONYM PROJEKTEM
 Robproj = Robapp.Project
 # POŁĄCZENIE Z WŁĄCZONĄ STRUKTURĄ
-rStruct = Robproj.Structure
+# rStruct = Robproj.Structure
 
 # PROGRAM
 
+def open_project(sciezka, nazwa):
+    """otwiera projekt rtd"""
+    Robproj.Open(sciezka)
+    Robproj.SaveAs(nazwa)
 
 def bar_robot(profil, p1, p2):
     """tworzy pręt typu pręt, zadane argumenty to:
@@ -28,6 +32,7 @@ def bar_robot(profil, p1, p2):
     p1 - lista - współrzędna początku
     p2 - lista - współrzędna końca"""
 
+    rStruct = Robproj.Structure
     n_start = rStruct.Nodes.FreeNumber  # dobiera wolne numery węzłów
     rStruct.Nodes.Create(n_start, p1[0], p1[1], p1[2])    # tworzy węzeł na początku
     n_end = rStruct.Nodes.FreeNumber
@@ -44,6 +49,7 @@ def panel_robot(thickness, type, contour):
     type - int - typ struktury
     contour - lista list trzyelementowych, punkty definiujące kontur"""
 
+    rStruct = Robproj.Structure
     panelid = rStruct.Objects.FreeNumber    # wolny numer panela
     gen_panel = rStruct.Objects
     panel = gen_panel.Create(panelid)
@@ -77,5 +83,6 @@ if __name__ == "__main__":
     Robproj = Robapp.Project
     # POŁĄCZENIE Z WŁĄCZONĄ STRUKTURĄ
     rStruct = Robproj.Structure
-    panel_robot("GR20_FUND", 0, [[0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0]])
-    bar_robot("S_C_30", [5, 5, 0], [5, 5, 10])
+    print(dir(Robproj))
+    #panel_robot("GR20_FUND", 0, [[0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0]])
+    #bar_robot("S_C_30", [5, 5, 0], [5, 5, 10])

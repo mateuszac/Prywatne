@@ -1,4 +1,5 @@
 {
    "sciezka_robot_dll": "C:/Program Files/Autodesk/Autodesk Robot Structural Analysis Professional 2020/System/Exe/Interop.RobotOM.dll",
-   "sciezka_szablon": "C:/Users/User/OneDrive/Pulpit/Konstrukcja eee.rtd"
+   "sciezka_szablon": "C:/Users/User/Prywatne/program zuraw/dist/test_zuraw_szablon.rtd",
+   "sciezka_zapis": "C:/Users/User/Prywatne/program zuraw/dist"
 }
