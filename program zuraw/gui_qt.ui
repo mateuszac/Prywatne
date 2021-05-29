@@ -426,7 +426,7 @@
       <item>
        <widget class="QDoubleSpinBox" name="wspolczynnik_gui">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -475,7 +475,7 @@
       <item>
        <widget class="QDoubleSpinBox" name="obciazenie_gui">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="maximum">
          <double>50000.000000000000000</double>

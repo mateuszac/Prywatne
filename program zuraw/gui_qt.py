@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'gui_qt.ui',
 # licensing of 'gui_qt.ui' applies.
 #
-# Created: Fri May 28 21:49:54 2021
+# Created: Sat May 29 17:26:41 2021
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -204,7 +204,7 @@ class Ui_Zuraw_window(object):
         self.label_30.setObjectName("label_30")
         self.horizontalLayout_12.addWidget(self.label_30)
         self.wspolczynnik_gui = QtWidgets.QDoubleSpinBox(self.centralwidget)
-        self.wspolczynnik_gui.setEnabled(False)
+        self.wspolczynnik_gui.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -227,7 +227,7 @@ class Ui_Zuraw_window(object):
         self.label_29.setObjectName("label_29")
         self.horizontalLayout_11.addWidget(self.label_29)
         self.obciazenie_gui = QtWidgets.QDoubleSpinBox(self.centralwidget)
-        self.obciazenie_gui.setEnabled(False)
+        self.obciazenie_gui.setEnabled(True)
         self.obciazenie_gui.setMaximum(50000.0)
         self.obciazenie_gui.setSingleStep(0.01)
         self.obciazenie_gui.setProperty("value", 500.0)

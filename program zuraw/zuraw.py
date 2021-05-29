@@ -51,7 +51,7 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
         x_stopy = self.x_stopy_gui.value()              # [m]
         y_stopy = self.y_stopy_gui.value()              # [m]
         srednica = self.srednica_gui.value()            # [cm]
-        obc_char = self.obciazenie_gui.value()          # [kN]
+        obc_char = self.obciazenie_gui.value() * 1000   # [N] (robot api widzi w Newtonach)
         wspolczynnik = self.wspolczynnik_gui.value()    # [-]
 
         self.zapis_json()
@@ -76,6 +76,9 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
         funkcje_robot.bar_robot("S_C_30", [x_stopy, -y_stopy, 0], [x_stopy, -y_stopy, 1])
         funkcje_robot.bar_robot("S_C_30", [x_stopy, y_stopy, 0], [x_stopy, y_stopy, 1])
         funkcje_robot.bar_robot("S_C_30", [-x_stopy, y_stopy, 0], [-x_stopy, y_stopy, 1])
+
+        # kombinacje obciążeń:
+        funkcje_robot.zuraw_load(obc_char, wspolczynnik, x_stopy, y_stopy)
 
     def zapis_json(self):
         """Zapisuje ścieżki do pliku json"""
