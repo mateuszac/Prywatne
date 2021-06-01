@@ -1,5 +1,4 @@
 import clr
-import inspect
 
 """TE OBIEKTY MUSZĄ SIĘ WGRAĆ, ŻEBY FUNKCJĘ DZIAŁĄŁY"""
 # POŁĄCZENIE Z DLL
@@ -27,7 +26,7 @@ def bar_robot(profil, p1, p2):
     n_end = rStruct.Nodes.FreeNumber
     rStruct.Nodes.Create(n_end, p2[0], p2[1], p2[2])    # tworzy węzeł na końcu
     n_bar = rStruct.Bars.FreeNumber
-    rStruct.Bars.Create(n_bar, n_start, n_end)
+    rStruct.Bars.Create(n_bar, n_start, n_end)      # tworzę obiekt, do którego nie mogę się odwoływać bez referencji
     bar = IRobotBar(rStruct.Bars.Get(n_bar))    # tworzę referencję do obiektu stworzonego linijkę wcześniej
     bar.SetLabel(IRobotLabelType.I_LT_BAR_SECTION, profil)
 
@@ -59,6 +58,34 @@ def panel_robot(thickness, type, contour):
     panel.SetLabel(IRobotLabelType.I_LT_PANEL_THICKNESS, thickness)
     panel.Update()
 
+
+def nowy_profil_preta(nazwa, srednica):
+    """Tworzy nowy profil pręta
+    nazwa = string : nazwa
+    srednica = int : srednica pręta w [cm]"""
+
+    srednica = srednica/100     # robot widzi w metrach
+
+    lab_serv = IRobotLabelServer(Robproj.Structure.Labels)
+    section = IRobotLabel(lab_serv.Create(IRobotLabelType.I_LT_BAR_SECTION, nazwa)) # obiekt przekroju section
+    data = IRobotBarSectionData(section.Data)   # obiekt który modyfikuje dane przekroju
+
+    data.Type = IRobotBarSectionType.I_BST_STANDARD
+    data.ShapeType = IRobotBarSectionShapeType.I_BSST_CONCR_COL_C # typ przekroju żelbetowy słup w kształcie koła
+    concrete_data = IRobotBarSectionConcreteData(data.Concrete)   # to daje dostęp do atrybutów żelbetowych profili
+    concrete_data.SetValue(IRobotBarSectionConcreteDataValue.I_BSCDV_COL_DE, srednica)
+
+    # data.SetValue() tu jakbym chciał typowe nie dla żelbetu np. Wx albo gamma atrybuty
+
+    lab_serv.Store(section)  # zapisuje stworzony przekrój żeby się wyświetlał na liście
+
+
+
+def nowa_grubosc_panelu():
+    """Tworzy nową grubość panelu"""
+    pass
+
+
 Robapp.Visible = True
 Robapp.Interactive = True
 
@@ -71,5 +98,6 @@ if __name__ == "__main__":
     Robproj = Robapp.Project
     # POŁĄCZENIE Z WŁĄCZONĄ STRUKTURĄ
     rStruct = Robproj.Structure
-    panel_robot("GR20_FUND", 0, [[0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0]])
     bar_robot("S_C_30", [5, 5, 0], [5, 5, 10])
+    nowy_profil_preta("testowy_przekroj", 30)
+

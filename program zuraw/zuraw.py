@@ -71,11 +71,17 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
                                                        [szerokosc / 2, dlugosc / 2, 0],
                                                        [-szerokosc / 2, dlugosc / 2, 0]])
 
+        profil = funkcje_robot.nowy_profil_preta("stopa_zurawia", srednica)
+        if profil == True:
+            self.warning("Usuń istniejący w projekcie profil \"stopa_zurawia\" i wygenerowane elementy, powtórz proces")
+        else:
+            pass
+
         # tworzę 4 jednometrowe pręty w miejscach przyłożenia stóp żurawia o zadanym profilu
-        funkcje_robot.bar_robot("S_C_30", [-x_stopy, -y_stopy, 0], [-x_stopy, -y_stopy, 1])
-        funkcje_robot.bar_robot("S_C_30", [x_stopy, -y_stopy, 0], [x_stopy, -y_stopy, 1])
-        funkcje_robot.bar_robot("S_C_30", [x_stopy, y_stopy, 0], [x_stopy, y_stopy, 1])
-        funkcje_robot.bar_robot("S_C_30", [-x_stopy, y_stopy, 0], [-x_stopy, y_stopy, 1])
+        funkcje_robot.bar_robot("stopa_zurawia", [-x_stopy, -y_stopy, 0], [-x_stopy, -y_stopy, 1])
+        funkcje_robot.bar_robot("stopa_zurawia", [x_stopy, -y_stopy, 0], [x_stopy, -y_stopy, 1])
+        funkcje_robot.bar_robot("stopa_zurawia", [x_stopy, y_stopy, 0], [x_stopy, y_stopy, 1])
+        funkcje_robot.bar_robot("stopa_zurawia", [-x_stopy, y_stopy, 0], [-x_stopy, y_stopy, 1])
 
         # kombinacje obciążeń:
         funkcje_robot.zuraw_load(obc_char, wspolczynnik, x_stopy, y_stopy)
@@ -111,6 +117,12 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
 
         except (FileNotFoundError, KeyError):
             pass
+
+    def warning(self, text):
+        """Okienko z informacją o błędzie lub wykonaniu zadania"""
+        warning_window = QtWidgets.QMessageBox()
+        warning_window.setText(text)
+        warning_window.exec()
 
 
 if __name__ == "__main__":

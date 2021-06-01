@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'gui_qt.ui',
 # licensing of 'gui_qt.ui' applies.
 #
-# Created: Sat May 29 17:26:41 2021
+# Created: Tue Jun  1 23:15:15 2021
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -147,7 +147,7 @@ class Ui_Zuraw_window(object):
         self.label_28.setObjectName("label_28")
         self.horizontalLayout_10.addWidget(self.label_28)
         self.srednica_gui = QtWidgets.QDoubleSpinBox(self.centralwidget)
-        self.srednica_gui.setEnabled(False)
+        self.srednica_gui.setEnabled(True)
         self.srednica_gui.setSingleStep(0.01)
         self.srednica_gui.setProperty("value", 30.0)
         self.srednica_gui.setObjectName("srednica_gui")
@@ -257,7 +257,7 @@ class Ui_Zuraw_window(object):
         self.gridLayout.addWidget(self.sciezka_zapis_gui, 3, 1, 1, 2)
         Zuraw_window.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Zuraw_window)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 840, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 840, 21))
         self.menubar.setObjectName("menubar")
         Zuraw_window.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Zuraw_window)

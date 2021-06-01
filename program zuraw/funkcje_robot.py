@@ -151,6 +151,29 @@ def load_in_point(_load, obc, _x, _y, _z):
     _load.SetValue(IRobotNodeForceInPointRecordValues.I_NFIPRV_POINT_Y, _y)
     _load.SetValue(IRobotNodeForceInPointRecordValues.I_NFIPRV_POINT_Z, _z)
 
+def nowy_profil_preta(nazwa, srednica):
+    """Tworzy nowy profil pręta
+    nazwa = string : nazwa
+    srednica = int : srednica pręta w [cm]"""
+
+    srednica = srednica/100     # robot widzi w metrach
+
+    lab_serv = IRobotLabelServer(Robproj.Structure.Labels)
+    try:
+        section = IRobotLabel(lab_serv.Create(IRobotLabelType.I_LT_BAR_SECTION, nazwa)) # obiekt przekroju section
+    except:
+        return True
+    data = IRobotBarSectionData(section.Data)   # obiekt który modyfikuje dane przekroju
+
+    data.Type = IRobotBarSectionType.I_BST_STANDARD
+    data.ShapeType = IRobotBarSectionShapeType.I_BSST_CONCR_COL_C # typ przekroju żelbetowy słup w kształcie koła
+    concrete_data = IRobotBarSectionConcreteData(data.Concrete)   # to daje dostęp do atrybutów żelbetowych profili
+    concrete_data.SetValue(IRobotBarSectionConcreteDataValue.I_BSCDV_COL_DE, srednica)
+
+    # data.SetValue() tu jakbym chciał typowe nie dla żelbetu np. Wx albo gamma atrybuty
+
+    lab_serv.Store(section)  # zapisuje stworzony przekrój żeby się wyświetlał na liście
+    return False
 
 def open_project(sciezka, nazwa):
     """otwiera projekt rtd"""
