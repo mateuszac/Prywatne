@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'gui_qt.ui',
 # licensing of 'gui_qt.ui' applies.
 #
-# Created: Tue Jun  1 23:15:15 2021
+# Created: Wed Jun  2 20:37:21 2021
 #      by: pyside2-uic  running on PySide2 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
@@ -85,7 +85,7 @@ class Ui_Zuraw_window(object):
         self.label_22.setObjectName("label_22")
         self.horizontalLayout_4.addWidget(self.label_22)
         self.klasa_betonu_gui = QtWidgets.QComboBox(self.centralwidget)
-        self.klasa_betonu_gui.setEnabled(False)
+        self.klasa_betonu_gui.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -117,7 +117,7 @@ class Ui_Zuraw_window(object):
         self.label_21.setObjectName("label_21")
         self.horizontalLayout_3.addWidget(self.label_21)
         self.sztywnosc_plyty_gui = QtWidgets.QDoubleSpinBox(self.centralwidget)
-        self.sztywnosc_plyty_gui.setEnabled(False)
+        self.sztywnosc_plyty_gui.setEnabled(True)
         self.sztywnosc_plyty_gui.setDecimals(0)
         self.sztywnosc_plyty_gui.setMaximum(300000.0)
         self.sztywnosc_plyty_gui.setProperty("value", 10000.0)
@@ -131,7 +131,7 @@ class Ui_Zuraw_window(object):
         self.label_20.setObjectName("label_20")
         self.horizontalLayout_2.addWidget(self.label_20)
         self.grubosc_plyty_gui = QtWidgets.QDoubleSpinBox(self.centralwidget)
-        self.grubosc_plyty_gui.setEnabled(False)
+        self.grubosc_plyty_gui.setEnabled(True)
         self.grubosc_plyty_gui.setDecimals(1)
         self.grubosc_plyty_gui.setMinimum(1.0)
         self.grubosc_plyty_gui.setMaximum(300.0)
@@ -257,7 +257,7 @@ class Ui_Zuraw_window(object):
         self.gridLayout.addWidget(self.sciezka_zapis_gui, 3, 1, 1, 2)
         Zuraw_window.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Zuraw_window)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 840, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 840, 26))
         self.menubar.setObjectName("menubar")
         Zuraw_window.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Zuraw_window)
@@ -282,7 +282,7 @@ class Ui_Zuraw_window(object):
         self.klasa_betonu_gui.setItemText(1, QtWidgets.QApplication.translate("Zuraw_window", "C25/30", None, -1))
         self.klasa_betonu_gui.setItemText(2, QtWidgets.QApplication.translate("Zuraw_window", "C30/37", None, -1))
         self.klasa_betonu_gui.setItemText(3, QtWidgets.QApplication.translate("Zuraw_window", "C35/45", None, -1))
-        self.label_21.setText(QtWidgets.QApplication.translate("Zuraw_window", "Sztywność Kz (Kx, Ky = 0.1Kz) [kPa]:", None, -1))
+        self.label_21.setText(QtWidgets.QApplication.translate("Zuraw_window", "Sztywność Kz (Kx, Ky trzeba ręcznie) [kPa]:", None, -1))
         self.label_20.setText(QtWidgets.QApplication.translate("Zuraw_window", "Grubość [cm] :", None, -1))
         self.label_28.setText(QtWidgets.QApplication.translate("Zuraw_window", "Średnica [cm] :", None, -1))
         self.label_26.setText(QtWidgets.QApplication.translate("Zuraw_window", "Odległość od środka x [m] :", None, -1))

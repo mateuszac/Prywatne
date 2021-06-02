@@ -81,10 +81,30 @@ def nowy_profil_preta(nazwa, srednica):
 
 
 
-def nowa_grubosc_panelu():
-    """Tworzy nową grubość panelu"""
-    pass
+def nowa_grubosc_panelu(nazwa, grubosc, kz, klasa_betonu):
+    """Tworzy nową grubość panelu
+    nazwa = string : nazwa
+    srednica = int : srednica pręta w [cm]
+    kz = int : kz w [kN/m3]
+    klasa_betonu = string"""
 
+    grubosc = grubosc/100 # robot widzi w metrach
+    kz = kz*1000 # robot widzi w N/m3
+
+    thickness = IRobotLabel(Robproj.Structure.Labels.Create(IRobotLabelType.I_LT_PANEL_THICKNESS, nazwa))
+    data = IRobotThicknessData(thickness.Data)
+
+    data.MaterialName = klasa_betonu    # dobieram materiał z dostępnych w szablonie w robocie
+
+    data.ThicknessType = IRobotThicknessType.I_TT_HOMOGENEOUS
+
+    homoType = IRobotThicknessHomoData(data.Data)   #obiekt zawierający atrybuty modyfikacji grubości panela
+    homoType.ThickConst = grubosc
+
+    data.ElasticFoundation = kz
+    ### kx, ky  nie są zaimplementowane w API :/
+
+    Robproj.Structure.Labels.Store(thickness)
 
 Robapp.Visible = True
 Robapp.Interactive = True
@@ -99,5 +119,5 @@ if __name__ == "__main__":
     # POŁĄCZENIE Z WŁĄCZONĄ STRUKTURĄ
     rStruct = Robproj.Structure
     bar_robot("S_C_30", [5, 5, 0], [5, 5, 10])
-    nowy_profil_preta("testowy_przekroj", 30)
+    nowa_grubosc_panelu("testowa_fat", 48, 10000, "B37")
 

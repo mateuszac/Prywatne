@@ -45,7 +45,7 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
         # zbieranie danych
         szerokosc = self.szerokosc_plyty_gui.value()    # [m]
         dlugosc = self.dlugosc_plyty_gui.value()        # [m]
-        klasa_betonu = self.klasa_betonu_gui.currentText()   # [string]
+        klasa_betonu_eurokod = self.klasa_betonu_gui.currentText()   # [string]
         grubosc = self.grubosc_plyty_gui.value()        # [cm]
         kz = self.sztywnosc_plyty_gui.value()           # [kPa]
         x_stopy = self.x_stopy_gui.value()              # [m]
@@ -54,22 +54,28 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
         obc_char = self.obciazenie_gui.value() * 1000   # [N] (robot api widzi w Newtonach)
         wspolczynnik = self.wspolczynnik_gui.value()    # [-]
 
+        kl_bet = {"C20/25": "B25",
+                  "C25/30": "B30",
+                  "C30/37": "B37",
+                  "C35/45": "B45"}
+        klasa_betonu = kl_bet[klasa_betonu_eurokod]
+
         self.zapis_json()
         import funkcje_robot
 
         try:
-            # tworzę panel płyty fundamentowej o zadanej grubości i konturze
-            funkcje_robot.panel_robot("GR20_FUND", 0, [[-szerokosc/2, -dlugosc/2, 0],
-                                                       [szerokosc/2, -dlugosc/2, 0],
-                                                       [szerokosc/2, dlugosc/2, 0],
-                                                       [-szerokosc/2, dlugosc/2, 0]])
+            funkcje_robot.nowa_grubosc_panelu("fund_zurawia", grubosc, kz, klasa_betonu)
+
         except:
             nazwa_zapisu = self.sciezka_zapis_gui.text() + "/" + self.nazwa_projektu_gui.text() + ".rtd"
             funkcje_robot.open_project(self.sciezka_szablon_gui.text(), nazwa_zapisu)
-            funkcje_robot.panel_robot("GR20_FUND", 0, [[-szerokosc / 2, -dlugosc / 2, 0],
-                                                       [szerokosc / 2, -dlugosc / 2, 0],
-                                                       [szerokosc / 2, dlugosc / 2, 0],
-                                                       [-szerokosc / 2, dlugosc / 2, 0]])
+            funkcje_robot.nowa_grubosc_panelu("fund_zurawia", grubosc, kz, klasa_betonu)
+
+        # tworzę panel płyty fundamentowej o zadanej grubości i konturze
+        funkcje_robot.panel_robot("fund_zurawia", 0, [[-szerokosc / 2, -dlugosc / 2, 0],
+                                                   [szerokosc / 2, -dlugosc / 2, 0],
+                                                   [szerokosc / 2, dlugosc / 2, 0],
+                                                   [-szerokosc / 2, dlugosc / 2, 0]])
 
         profil = funkcje_robot.nowy_profil_preta("stopa_zurawia", srednica)
         if profil == True:

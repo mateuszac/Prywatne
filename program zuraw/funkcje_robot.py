@@ -151,6 +151,7 @@ def load_in_point(_load, obc, _x, _y, _z):
     _load.SetValue(IRobotNodeForceInPointRecordValues.I_NFIPRV_POINT_Y, _y)
     _load.SetValue(IRobotNodeForceInPointRecordValues.I_NFIPRV_POINT_Z, _z)
 
+
 def nowy_profil_preta(nazwa, srednica):
     """Tworzy nowy profil pręta
     nazwa = string : nazwa
@@ -175,10 +176,38 @@ def nowy_profil_preta(nazwa, srednica):
     lab_serv.Store(section)  # zapisuje stworzony przekrój żeby się wyświetlał na liście
     return False
 
+
+def nowa_grubosc_panelu(nazwa, grubosc, kz, klasa_betonu):
+    """Tworzy nową grubość panelu
+    nazwa = string : nazwa
+    srednica = int : srednica pręta w [cm]
+    kz = int : kz w [kN/m3]
+    klasa_betonu = string"""
+
+    grubosc = grubosc/100 # robot widzi w metrach
+    kz = kz*1000 # robot widzi w N/m3
+
+    thickness = IRobotLabel(Robproj.Structure.Labels.Create(IRobotLabelType.I_LT_PANEL_THICKNESS, nazwa))
+    data = IRobotThicknessData(thickness.Data)
+
+    data.MaterialName = klasa_betonu    # dobieram materiał z dostępnych w szablonie w robocie
+
+    data.ThicknessType = IRobotThicknessType.I_TT_HOMOGENEOUS
+
+    homoType = IRobotThicknessHomoData(data.Data)   #obiekt zawierający atrybuty modyfikacji grubości panela
+    homoType.ThickConst = grubosc
+
+    data.ElasticFoundation = kz
+    # kx, ky  nie są zaimplementowane w API :/
+
+    Robproj.Structure.Labels.Store(thickness)
+
+
 def open_project(sciezka, nazwa):
     """otwiera projekt rtd"""
     Robproj.Open(sciezka)
     Robproj.SaveAs(nazwa)
+
 
 def bar_robot(profil, p1, p2):
     """tworzy pręt typu pręt, zadane argumenty to:
