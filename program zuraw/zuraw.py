@@ -84,13 +84,13 @@ class ZurawGUI(gui_qt.Ui_Zuraw_window, QtWidgets.QMainWindow):
             pass
 
         # tworzę 4 jednometrowe pręty w miejscach przyłożenia stóp żurawia o zadanym profilu
-        funkcje_robot.bar_robot("stopa_zurawia", [-x_stopy, -y_stopy, 0], [-x_stopy, -y_stopy, 1])
-        funkcje_robot.bar_robot("stopa_zurawia", [x_stopy, -y_stopy, 0], [x_stopy, -y_stopy, 1])
-        funkcje_robot.bar_robot("stopa_zurawia", [x_stopy, y_stopy, 0], [x_stopy, y_stopy, 1])
-        funkcje_robot.bar_robot("stopa_zurawia", [-x_stopy, y_stopy, 0], [-x_stopy, y_stopy, 1])
+        [n1_d, n1_g] = funkcje_robot.bar_robot("stopa_zurawia", [-x_stopy, -y_stopy, 0], [-x_stopy, -y_stopy, 1])
+        [n2_d, n2_g] = funkcje_robot.bar_robot("stopa_zurawia", [x_stopy, -y_stopy, 0], [x_stopy, -y_stopy, 1])
+        [n3_d, n3_g] = funkcje_robot.bar_robot("stopa_zurawia", [x_stopy, y_stopy, 0], [x_stopy, y_stopy, 1])
+        [n4_d, n4_g] = funkcje_robot.bar_robot("stopa_zurawia", [-x_stopy, y_stopy, 0], [-x_stopy, y_stopy, 1])
 
         # kombinacje obciążeń:
-        funkcje_robot.zuraw_load(obc_char, wspolczynnik, x_stopy, y_stopy)
+        funkcje_robot.zuraw_load(obc_char, wspolczynnik, [n1_g, n2_g, n3_g, n4_g])
 
     def zapis_json(self):
         """Zapisuje ścieżki do pliku json"""
